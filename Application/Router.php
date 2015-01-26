@@ -30,16 +30,28 @@ class Router
 		$this->requestMethod = $_SERVER['REQUEST_METHOD'];
 		$this->routesArray = $this->getRoutesArray();
 
-		$modelName = $this->getModelName();
-		if (class_exists($modelName)) {
-			echo $this->renderAction($modelName);
+		if ($this->requestUri == '/' || $this->requestUri == '') {
+			echo $this->renderIndex();
 		} else {
-			throw new \Exception('Model ' . $modelName . ' does not exist.');
+			$modelName = $this->getModelName();
+			if (class_exists($modelName)) {
+				echo $this->renderAction($modelName);
+			} else {
+				throw new \Exception('Model ' . $modelName . ' does not exist.');
+			}
 		}
+	}
+
+	protected function renderIndex()
+	{
+		$view = __DIR__ . DIRECTORY_SEPARATOR . '../Views/index.php';
+		$pictures = \Models\Picture::find('all');
+		require_once $view;
 	}
 
 	protected function renderAction($modelName)
 	{
+		header("Access-Control-Allow-Origin: *");
 		if ($this->issetRouteParams()) {
 			if ($this->requestMethod === 'GET') {
 				echo $this->response($modelName::find_by_pk($this->routesArray[1], []));
