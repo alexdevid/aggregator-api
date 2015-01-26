@@ -1,0 +1,110 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "11b338097bcca4e523505f5283b52024",
+    "packages": [
+        {
+            "name": "php-activerecord/php-activerecord",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jpfuentes2/php-activerecord.git",
+                "reference": "b2ed6fc64ef35c88fd30d71091df0d0765719901"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jpfuentes2/php-activerecord/zipball/b2ed6fc64ef35c88fd30d71091df0d0765719901",
+                "reference": "b2ed6fc64ef35c88fd30d71091df0d0765719901",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "pear/log": "~1.12",
+                "pear/pear_exception": "1.0-beta1",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "ActiveRecord.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "php-activerecord is an open source ORM library based on the ActiveRecord pattern.",
+            "homepage": "http://www.phpactiverecord.org/",
+            "keywords": [
+                "activerecord",
+                "orm"
+            ],
+            "time": "2015-01-17 23:49:21"
+        },
+        {
+            "name": "respect/rest",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Rest.git",
+                "reference": "256985622f29f8e568eba82b4590a414908a6c46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Rest/zipball/256985622f29f8e568eba82b4590a414908a6c46",
+                "reference": "256985622f29f8e568eba82b4590a414908a6c46",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Respect\\": "library/Respect"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Gaigalas",
+                    "email": "alexandre@gaigalas.net"
+                },
+                {
+                    "name": "Respect/Data Contributors",
+                    "homepage": "https://github.com/Respect/Data/graphs/contributors"
+                }
+            ],
+            "description": "Thin controller for RESTful applications",
+            "homepage": "http://respect.li/",
+            "time": "2015-01-12 10:03:09"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "php-activerecord/php-activerecord": 20,
+        "respect/rest": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "alexdevid/rest",
+  "description": "rest api + website for me!",
+  "authors": [
+    {
+      "name": "Alexander Devid",
+      "email": "kerdevid@gmail.com"
+    }
+  ],
+  "require": {
+	  "php-activerecord/php-activerecord": "dev-master",
+	  "respect/rest": "dev-master"
+  }
+}
