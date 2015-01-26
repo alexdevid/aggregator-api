@@ -9,6 +9,7 @@ require_once __DIR__ . '/vendor/autoload.php';
  */
 class index
 {
+
 	public $action = null;
 	public $postData = null;
 	public $requestAction = null;
@@ -16,7 +17,8 @@ class index
 
 	public function __construct($config)
 	{
-		$this->config = json_decode(json_encode($config), FALSE);;
+		header("Access-Control-Allow-Origin: *");
+		$this->config = json_decode(json_encode($config), FALSE);
 		$this->configure()->router();
 	}
 
@@ -72,7 +74,7 @@ class index
 		$models = Category::find('all');
 		$response = "[";
 		$counter = 0;
-		foreach($models as $model) {
+		foreach ($models as $model) {
 			$response .= $model->to_json();
 			$counter++;
 			$response .= ($counter == count($models)) ? "" : ",";
@@ -89,6 +91,8 @@ class index
 			'status' => 404
 		]);
 	}
+
 }
+
 $config = require_once __DIR__ . DIRECTORY_SEPARATOR . 'config/main.php';
 $index = new index($config);
