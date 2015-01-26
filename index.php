@@ -9,7 +9,6 @@ require_once __DIR__ . '/vendor/autoload.php';
  */
 class index
 {
-
 	public $action = null;
 	public $postData = null;
 	public $requestAction = null;
@@ -25,14 +24,15 @@ class index
 	{
 		$username = $this->config->db->username;
 		$password = ($this->config->db->password) ? ':' . $this->config->db->password : '';
+		$dbname = $this->config->db->dbname;
 
-		ActiveRecord\Config::initialize(function($cfg) use ($username, $password) {
+		ActiveRecord\Config::initialize(function($cfg) use ($username, $password, $dbname) {
 			$cfg->set_model_directory(__DIR__ . '/models/');
 			$cfg->set_connections(
 					array(
-						'development' => 'mysql://' . $username . $password . '@localhost/aggr?charset=utf8',
-						'test' => 'mysql://' . $username . $password . '@localhost/aggr?charset=utf8',
-						'production' => 'mysql://' . $username . $password . '@localhost/aggr?charset=utf8',
+						'development' => 'mysql://' . $username . $password . '@localhost/' . $dbname . '?charset=utf8',
+						'test' => 'mysql://' . $username . $password . '@localhost/' . $dbname . '?charset=utf8',
+						'production' => 'mysql://' . $username . $password . '@localhost/' . $dbname . '?charset=utf8',
 					)
 			);
 		});
