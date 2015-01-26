@@ -2,19 +2,19 @@
 
 namespace Controllers;
 
-use Respect\Rest\Routable;
+use Models\Category;
 
 /**
  * Description of CategoriesController
  *
  * @author alexdevid
  */
-class CategoriesController implements Routable
+class CategoriesController extends RestController
 {
 
-	public function get()
-	{
-		return "OLOLO YOU GET IT!";
-	}
+    public function get()
+    {
+        return $this->responseArray(Category::find('all'));
+    }
 
 }

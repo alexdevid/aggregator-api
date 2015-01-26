@@ -1,0 +1,14 @@
+app_name: alexdevid_portal
+db:
+    name: aggr
+    username: root
+    password: ''
+    host: localhost
+routes:
+    categories_all:
+        route: '/categories/*'
+        controller: categories
+    category:
+        route: '/category/*'
+        controller: category
+        

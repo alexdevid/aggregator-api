@@ -2,7 +2,6 @@
 
 namespace Controllers;
 
-use Respect\Rest\Routable;
 use Models\Category;
 
 /**
@@ -10,22 +9,22 @@ use Models\Category;
  *
  * @author alexdevid
  */
-class CategoryController implements Routable
+class CategoryController extends RestController
 {
 
-	public function get($id)
-	{
-		return Category::find_by_pk($id, [])->to_json();
-	}
+    public function get($id)
+    {
+        return Category::find_by_pk($id, [])->to_json();
+    }
 
-	public function delete($id)
-	{
+    public function delete($id)
+    {
+        
+    }
 
-	}
-
-	public function put($id)
-	{
-
-	}
+    public function put($id)
+    {
+        
+    }
 
 }
