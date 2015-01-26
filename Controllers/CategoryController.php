@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Respect\Rest\Routable;
+use Models\Category;
 
 /**
  * Description of CategoriesController
@@ -14,7 +15,7 @@ class CategoryController implements Routable
 
 	public function get($id)
 	{
-		return "OLOLO YOU GET BY ID !" . $id;
+		return Category::find_by_pk($id, [])->to_json();
 	}
 
 	public function delete($id)

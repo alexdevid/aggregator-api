@@ -43,10 +43,20 @@ class Kernel
 			return 'Hello World';
 		});
 
-		foreach($this->config->routes as $route) {
+		foreach ($this->config->routes as $route) {
 			$this->router->get($route->route, '\Controllers\\' . ucfirst($route->controller) . 'Controller');
 		}
 
+		return $this;
+	}
+
+	private function initConnection()
+	{
+		ActiveRecord\Config::initialize(function($cfg) {
+			$cfg->set_model_directory(__DIR__ . '/../Models');
+			$cfg->set_connections(array(
+				'development' => 'mysql://' . $this->config->db->username . ':' . $this->config->db->password . '/' . $this->config->db->dbname . '?charset=utf8'));
+		});
 	}
 
 }
