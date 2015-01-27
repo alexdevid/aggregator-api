@@ -1,7 +1,6 @@
 <?php
 
-use Respect\Rest\Router;
-use Respect\Rest\Request;
+use Components\Rest;
 use Symfony\Component\Yaml\Yaml;
 use ActiveRecord\Config as DbConfig;
 use Models\Category;
@@ -18,16 +17,7 @@ class Kernel
 	 */
 	public $config = null;
 
-	/**
-	 * @var Respect\Rest\Router the main application router
-	 */
-	public $router = null;
-
-	/**
-	 *
-	 * @var type
-	 */
-	public $controller = null;
+	public $request;
 
 	/**
 	 * @var Kernel application instance
@@ -40,12 +30,17 @@ class Kernel
 	public function __construct()
 	{
 
-		$this->router = new Router;
+		//$this->router = new Router;
 		Kernel::$app = $this;
 
 		$this->parseConfig()
-				->initConnection()
-				->initRoutes();
+				->initConnection();
+
+		new Rest($this->config->rest);
+		
+		if(!$this->request) {
+			$this->render();
+		}
 	}
 
 	/**
@@ -62,39 +57,15 @@ class Kernel
 	}
 
 	/**
-	 * Router initialization
-	 *
-	 * @todo
-	 * @return \App\Kernel
-	 */
-	private function initRoutes()
-	{
-		$this->router->get('/', function() {
-			return $this->render('index', ['categories' => \Models\Category::find('all')]);
-		});
-
-		foreach ($this->config->routes as $route) {
-			$controllerName = '\Controllers\\' . ucfirst($route->controller) . 'Controller';
-			if (class_exists($controllerName)) {
-				$this->controller = new $controllerName;
-				$this->router->any($route->route, $this->controller);
-			}
-		}
-		return $this;
-	}
-
-	/**
 	 *
 	 * @param string $tpl template file name
 	 * @param array $data array of variables
 	 * @return html template
 	 */
-	private function render($tpl, array $data = [])
+	private function render()
 	{
-		foreach ($data as $key => $value) {
-			$$key = $value;
-		}
-		require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . $tpl . '.php';
+		$categories = Category::find('all');
+		require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'index' . '.php';
 		return $this->end();
 	}
 

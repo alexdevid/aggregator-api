@@ -9,7 +9,6 @@
     ],
     "require": {
         "php-activerecord/php-activerecord": "dev-master",
-        "respect/rest": "dev-master",
         "symfony/yaml": "~2.6.0"
     },
     "config": {

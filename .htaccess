@@ -2,20 +2,13 @@ DirectoryIndex index.php
 php_flag display_errors On
 
 RewriteEngine On
-# Request redirect with response code 301 "Permanently moved" if a trailing
-# / was found. This will indicate to search engines that the content is 
-# the same and that we prefer not using a slash.
-RewriteCond %{ENV:REDIRECT_STATUS} =""
-RewriteRule ^(.*)/$  /$1 [R=301,L]
-# Alternatively if you want to always add a slash uncomment
-# this rule rather and comment the previous rule leaving the
-# line starting with "RewriteCond" as it is.
-# RewriteRule ^(.*[^/])$  /$1/ [R=301,L]
 
-# Be careful not to use both at the same time or you will end
-# up with a redirect loop.
-
-# Redirect all requests not pointing at an actual file to index.php
-RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php [L] 
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteRule ^(.*)$ index.php?rest=$1 [QSA,NC,L]
+
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)$ index.php [QSA,NC,L]
+
+RewriteCond %{REQUEST_FILENAME} -s
+RewriteRule ^(.*)$ index.php [QSA,NC,L]

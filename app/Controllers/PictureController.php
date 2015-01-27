@@ -9,7 +9,7 @@ use Models\Picture;
  *
  * @author alexdevid
  */
-class PictureController extends RestController
+class PictureController extends Controller
 {
 
 	public function get($id = null)
@@ -22,26 +22,39 @@ class PictureController extends RestController
 		return $response;
 	}
 
+	/**
+	 * curl -X DELETE http://darina.local/picture/123
+	 * @param type $id
+	 */
 	public function delete($id)
 	{
-
+		$model = Picture::find_by_pk($id, []);
+		return json_encode($model->delete());
 	}
 
-	public function put($id)
+	public function put()
 	{
-
+		$model = new Picture;
+		foreach($this->request->params as $param => $value) {
+			$model->$param = $value;
+		}
+		$model->save();
+		return $model->to_json();
 	}
 
 	/**
 	 * Example:
-	 * curl -X POST -H "Content-Type: application/json" -d '{"url":"xyz","status":"1", "category_id": 23}' http://darina.local/picture
+	 * curl -X POST -H "Content-Type: application/json" -d '{"url":"xyz","status":"1", "category_id": 23}' http://darina.local/picture/123
 	 * @return type
 	 */
-	public function post()
+	public function post($id)
 	{
-		return json_encode($_POST);
+		$model = Picture::find_by_pk($id, []);
+		foreach($this->request->params as $param => $value) {
+			$model->$param = $value;
+		}
+		$model->save();
+		return $model->to_json();
 	}
 
 }
-
-

@@ -9,26 +9,32 @@ use Models\Category;
  *
  * @author alexdevid
  */
-class CategoryController extends RestController
+class CategoryController extends Controller
 {
-    public function get($id = null)
-    {
+
+	public function get($id = null)
+	{
 		if ($id) {
 			$response = Category::find_by_pk($id, [])->to_json();
 		} else {
 			$response = $this->responseArray(Category::find('all'));
 		}
 		return $response;
-    }
+	}
 
-    public function delete($id)
-    {
+	public function delete($id)
+	{
 
-    }
+	}
 
-    public function put($id)
-    {
+	public function put()
+	{
 
-    }
+	}
+
+	public function post($id)
+	{
+
+	}
 
 }
