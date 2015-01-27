@@ -20,7 +20,7 @@ class RestController implements Routable
 
     public function __construct()
     {
-        
+
     }
 
     protected function responseArray($models)

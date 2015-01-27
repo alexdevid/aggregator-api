@@ -11,6 +11,12 @@ use Models\Category;
  */
 class CategoryController extends RestController
 {
+	const TEST = "TEST";
+
+	public function test()
+	{
+		echo 'HEOOLSDAD';
+	}
 
     public function get($id)
     {
@@ -19,12 +25,12 @@ class CategoryController extends RestController
 
     public function delete($id)
     {
-        
+
     }
 
     public function put($id)
     {
-        
+
     }
 
 }
