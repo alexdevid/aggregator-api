@@ -78,8 +78,8 @@ class Kernel
 		DbConfig::initialize(function($cfg) {
 			$cfg->set_model_directory(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Models');
 			$cfg->set_connections([
-				'development' => 'mysql://' . $this->config->db->username . $this->config->db->password . '@' . $this->config->db->host . '/' . $this->config->db->name . '?charset=utf8',
-				'production' => 'mysql://' . $this->config->db->username . $this->config->db->password . '@' . $this->config->db->host . '/' . $this->config->db->name . '?charset=utf8',
+				'development' => 'mysql://' . $this->config->db->username . ':' .  $this->config->db->password . '@' . $this->config->db->host . '/' . $this->config->db->name . '?charset=utf8',
+				'production' => 'mysql://' . $this->config->db->username . ':'  .  $this->config->db->password . '@' . $this->config->db->host . '/' . $this->config->db->name . '?charset=utf8',
 			]);
 		});
 		return $this;
