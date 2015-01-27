@@ -1,8 +1,8 @@
 app_name: alexdevid_portal
 db:
-    name: kopilka
-    username: devid
-    password: 'Q2qaz12'
+    name: aggr
+    username: root
+    password: ''
     host: localhost
 rest:
     prefix: api

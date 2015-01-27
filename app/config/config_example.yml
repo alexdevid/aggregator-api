@@ -4,10 +4,5 @@ db:
     username: root
     password: ''
     host: localhost
-routes:
-    category:
-        route: '/category/*'
-        controller: category
-    picture:
-        route: '/picture/*'
-        controller: picture
+rest:
+    prefix: api
