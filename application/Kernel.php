@@ -21,6 +21,13 @@ class Kernel
 	 * @var Respect\Rest\Router the main application router
 	 */
 	public $router = null;
+
+	/**
+	 *
+	 * @var type
+	 */
+	public $controller = null;
+
 	/**
 	 * @var Kernel application instance
 	 */
@@ -68,7 +75,10 @@ class Kernel
 
 		foreach ($this->config->routes as $route) {
 			$controllerName = '\Controllers\\' . ucfirst($route->controller) . 'Controller';
-			$this->router->any($route->route, $controllerName);
+			if (class_exists($controllerName)) {
+				$this->controller = new $controllerName;
+				$this->router->any($route->route, $this->controller);
+			}
 		}
 		return $this;
 	}
@@ -79,11 +89,13 @@ class Kernel
 	 * @param array $data array of variables
 	 * @return html template
 	 */
-	private function render($tpl, array $data = []){
-		foreach($data as $key => $value) {
+	private function render($tpl, array $data = [])
+	{
+		foreach ($data as $key => $value) {
 			$$key = $value;
 		}
-		return require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . $tpl . '.php';
+		require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . $tpl . '.php';
+		return $this->end();
 	}
 
 	/**
@@ -100,6 +112,15 @@ class Kernel
 			]);
 		});
 		return $this;
+	}
+
+	/**
+	 *
+	 * @return type
+	 */
+	public function end()
+	{
+		return die();
 	}
 
 }

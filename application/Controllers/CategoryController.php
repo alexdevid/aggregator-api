@@ -11,16 +11,14 @@ use Models\Category;
  */
 class CategoryController extends RestController
 {
-	const TEST = "TEST";
-
-	public function test()
-	{
-		echo 'HEOOLSDAD';
-	}
-
-    public function get($id)
+    public function get($id = null)
     {
-        return Category::find_by_pk($id, [])->to_json();
+		if ($id) {
+			$response = Category::find_by_pk($id, [])->to_json();
+		} else {
+			$response = $this->responseArray(Category::find('all'));
+		}
+		return $response;
     }
 
     public function delete($id)
