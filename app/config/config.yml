@@ -8,3 +8,6 @@ routes:
     category:
         route: '/category/*'
         controller: category
+    picture:
+        route: '/picture/*'
+        controller: picture

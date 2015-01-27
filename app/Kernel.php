@@ -1,6 +1,7 @@
 <?php
 
 use Respect\Rest\Router;
+use Respect\Rest\Request;
 use Symfony\Component\Yaml\Yaml;
 use ActiveRecord\Config as DbConfig;
 use Models\Category;
@@ -71,7 +72,6 @@ class Kernel
 		$this->router->get('/', function() {
 			return $this->render('index', ['categories' => \Models\Category::find('all')]);
 		});
-
 
 		foreach ($this->config->routes as $route) {
 			$controllerName = '\Controllers\\' . ucfirst($route->controller) . 'Controller';
