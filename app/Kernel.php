@@ -39,7 +39,7 @@ class Kernel
 		new Rest($this->config->rest);
 		
 		if(!$this->request) {
-			$this->render();
+			$this->end();
 		}
 	}
 
@@ -54,19 +54,6 @@ class Kernel
 		$config = Yaml::parse(file_get_contents($configFile), true, true);
 		$this->config = json_decode(json_encode($config));
 		return $this;
-	}
-
-	/**
-	 *
-	 * @param string $tpl template file name
-	 * @param array $data array of variables
-	 * @return html template
-	 */
-	private function render()
-	{
-		$categories = Category::find('all');
-		require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'index' . '.php';
-		return $this->end();
 	}
 
 	/**
