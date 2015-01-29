@@ -1,7 +1,0 @@
-{
-  "name": "aggregator-assets",
-  "dependencies": {
-	"angular": "latest",
-	"bootstrap": "latest"
-  }
-}

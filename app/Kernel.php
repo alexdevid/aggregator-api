@@ -3,7 +3,6 @@
 use Components\Rest;
 use Symfony\Component\Yaml\Yaml;
 use ActiveRecord\Config as DbConfig;
-use Models\Picture;
 
 /**
  * @author Alexander Devid <kerdevid@gmail.com>
@@ -39,7 +38,7 @@ class Kernel
 		new Rest($this->config->rest);
 
 		if(!$this->request) {
-			$this->render();
+			$this->end();
 		}
 	}
 
@@ -57,20 +56,6 @@ class Kernel
 	}
 
 	/**
-	 *
-	 * @param string $tpl template file name
-	 * @param array $data array of variables
-	 * @return html template
-	 */
-	private function render()
-	{
-		$pictures = Picture::find('all');
-		require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'index' . '.php';
-		return $this->end();
-	}
-
-	/**
-	 *
 	 * @return \App\Kernel
 	 */
 	private function initConnection()
