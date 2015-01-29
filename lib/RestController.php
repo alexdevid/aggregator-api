@@ -1,6 +1,6 @@
 <?php
 
-namespace Components;
+namespace Alexdevid;
 
 /**
  * Description of RestController
@@ -32,6 +32,19 @@ abstract class RestController
 	public function checkAuth()
 	{
 		return true;
+	}
+
+	public function responseArray($models)
+	{
+		$response = "[";
+		$counter = 0;
+		foreach ($models as $model) {
+			$response .= $model->to_json();
+			$counter++;
+			$response .= ($counter == count($models)) ? "" : ",";
+		}
+		$response .= "]";
+		return $response;
 	}
 
 	// @codeCoverageIgnoreStart

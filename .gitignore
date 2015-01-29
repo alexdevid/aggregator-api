@@ -1,4 +1,5 @@
 vendor
 nbproject
 .idea
-app/config/config.yml
+composer.lock
+phpunit.xml

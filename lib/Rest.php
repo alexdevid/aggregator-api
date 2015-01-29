@@ -1,6 +1,6 @@
 <?php
 
-namespace Components;
+namespace Alexdevid;
 
 class Rest
 {
@@ -13,9 +13,9 @@ class Rest
 	 * Constructor
 	 * calls processRequest internally
 	 */
-	public function __construct($config)
+	public function __construct()
 	{
-		$this->prefix = $config->prefix;
+		$this->prefix = RestServer::$app->prefix;
 		$this->request = $this->getRequest();
 		$this->controller = $this->getController();
 		$this->processRequest();
@@ -46,6 +46,7 @@ class Rest
 
 	private function response()
 	{
+		$this->request->setHeaders();
 		echo $this->response;
 	}
 
@@ -60,13 +61,15 @@ class Rest
 
 	private function getController()
 	{
-		$controllerName = "\Controllers\\" . ucfirst($this->request->resource) . "Controller";
-		if (!is_dir($_SERVER['DOCUMENT_ROOT']) . DIRECTORY_SEPARATOR . $this->request->resource)
-			if (class_exists($controllerName)) {
-				$controller = new $controllerName($this->request);
-			} else {
-				throw new Exception("Controller does not exist", "500");
-			}
+		$controllerName = '\\' . RestServer::$app->controllersNamespace . '\\' . ucfirst($this->request->resource) . "Controller";
+
+		//echo $controllerName; die();
+
+		if (class_exists($controllerName)) {
+			$controller = new $controllerName($this->request);
+		} else {
+			throw new \Exception("Controller does not exist " . $controllerName, "500");
+		}
 		return $controller;
 	}
 

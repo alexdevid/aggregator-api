@@ -3,13 +3,14 @@
 namespace Controllers;
 
 use Models\Picture;
+use Alexdevid\RestController;
 
 /**
  * Description of PictureController
  *
  * @author alexdevid
  */
-class PictureController extends Controller
+class PictureController extends RestController
 {
 
 	public function get($id = null)

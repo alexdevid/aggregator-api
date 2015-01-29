@@ -3,13 +3,14 @@
 namespace Controllers;
 
 use Models\Category;
+use Alexdevid\RestController;
 
 /**
  * Description of CategoriesController
  *
  * @author alexdevid
  */
-class CategoryController extends Controller
+class CategoryController extends RestController
 {
 
 	public function get($id = null)
