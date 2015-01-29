@@ -1,7 +1,10 @@
 <?php
 
 require_once 'vendor/autoload.php';
-require_once 'vendor/alexdevid/rest-server/Server.php';
+
+/**
+ * Use your autoload function for this;
+ */
 require_once 'Controllers/CategoryController.php';
 require_once 'Controllers/PictureController.php';
 require_once 'Models/Picture.php';

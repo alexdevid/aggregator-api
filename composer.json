@@ -4,6 +4,7 @@
     "keywords": ["rest", "php", "minimal"],
     "homepage": "http://github.com/alexdevid/rest-server/",
     "license": "MIT",
+	"version" : "1.0.0-alpha",
     "authors": [
         {
             "name": "Alexander Devid",

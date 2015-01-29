@@ -1,3 +1,6 @@
+###
+#	Any other .htaccess with enabled ModRewrite should be OK
+###
 DirectoryIndex index.php
 php_flag display_errors On
 
