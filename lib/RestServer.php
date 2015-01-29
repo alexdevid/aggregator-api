@@ -24,22 +24,9 @@ class RestServer
 	/**
 	 * @inheritdoc
 	 */
-	public function __construct($config)
+	public function __construct()
 	{
-
 		RestServer::$app = $this;
-
-		foreach ($config as $key => $value) {
-			$this->$key = $value;
-		}
-
-		$this->initConnection();
-
-		new Rest;
-
-		if (!$this->request) {
-			$this->end();
-		}
 	}
 
 	/**

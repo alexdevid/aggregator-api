@@ -19,8 +19,8 @@ class Request
 
 	public function __construct($prefix)
 	{
-		$this->request_uri = $_SERVER["REQUEST_URI"];
-		$this->method = $_SERVER["REQUEST_METHOD"];
+		$this->request_uri = isset($_SERVER["REQUEST_URI"]) ?: null;
+		$this->method = isset($_SERVER["REQUEST_METHOD"]) ?: null;
 
 		if (strpos($this->request_uri, $prefix) === false) {
 			RestServer::$app->request = null;
@@ -30,7 +30,7 @@ class Request
 
 		$this->request_uri = str_replace($prefix . '/', '', $this->request_uri);
 		$requestArray = explode('/', $this->request_uri);
-		$this->resource = $requestArray[1];
+		$this->resource = isset($requestArray[1]) ?: null;
 
 		if (count($requestArray) > 2) {
 			$this->resource_id = $requestArray[2];
