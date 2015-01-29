@@ -2,7 +2,6 @@
 
 namespace Controllers;
 
-use Models\Category;
 use Alexdevid\RestController;
 
 /**
