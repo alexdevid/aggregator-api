@@ -3,7 +3,7 @@
 use Components\Rest;
 use Symfony\Component\Yaml\Yaml;
 use ActiveRecord\Config as DbConfig;
-use Models\Category;
+use Models\Picture;
 
 /**
  * @author Alexander Devid <kerdevid@gmail.com>
@@ -37,7 +37,7 @@ class Kernel
 				->initConnection();
 
 		new Rest($this->config->rest);
-		
+
 		if(!$this->request) {
 			$this->render();
 		}
@@ -64,7 +64,7 @@ class Kernel
 	 */
 	private function render()
 	{
-		$categories = Category::find('all');
+		$pictures = Picture::find('all');
 		require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'index' . '.php';
 		return $this->end();
 	}
