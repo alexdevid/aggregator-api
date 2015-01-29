@@ -1,6 +1,6 @@
 {
-    "name": "alexdevid/rest",
-    "description": "rest api + website for me!",
+    "name": "alexdevid/rest-server",
+    "description": "Simple php REST-server",
     "authors": [
         {
             "name": "Alexander Devid",
@@ -10,8 +10,5 @@
     "require": {
         "php-activerecord/php-activerecord": "dev-master",
         "symfony/yaml": "~2.6.0"
-    },
-    "config": {
-        "bin-dir": "bin"
     }
 }
