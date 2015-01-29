@@ -1,3 +1,5 @@
+# IF YOU SOMEHOW FOUND THIS, DONT USE IT, IT IS UNDER DEVELOPMENT
+
 # PHP REST-Server
 ---
 ## Documentation @todo
