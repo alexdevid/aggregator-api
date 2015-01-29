@@ -11,49 +11,30 @@ abstract class RestController
 {
 
 	public $request;
-	public $response;
-	public $responseStatus;
 
 	public function __construct($request)
 	{
 		$this->request = $request;
 	}
 
-	final public function getResponseStatus()
+	/**
+	 * Custom function used to serialize data passed from Controller
+	 * @param type $data Data passed from controller
+	 * @return string
+	 * @json
+	 */
+	public function response($data)
 	{
-		return $this->responseStatus;
-	}
-
-	final public function getResponse()
-	{
-		return $this->response;
-	}
-
-	public function checkAuth()
-	{
-		return true;
-	}
-
-	public function responseArray($models)
-	{
-		$response = "[";
-		$counter = 0;
-		foreach ($models as $model) {
-			$response .= $model->to_json();
-			$counter++;
-			$response .= ($counter == count($models)) ? "" : ",";
-		}
-		$response .= "]";
-		return $response;
+		return $data;
 	}
 
 	// @codeCoverageIgnoreStart
-	abstract public function get($id = null);
+	abstract public function get();
 
-	abstract public function post($id);
+	abstract public function post();
 
 	abstract public function put();
 
-	abstract public function delete($id);
+	abstract public function delete();
 	// @codeCoverageIgnoreEnd
 }

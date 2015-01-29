@@ -49,6 +49,22 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->server->getRequest()->setMethod('POST');
 		$this->assertEquals($this->server->getRequest()->method, 'POST');
+
+		$this->server->getRequest()->setMethod();
+		$this->assertEquals($this->server->getRequest()->method, NULL);
+	}
+
+	public function testSetRequestId()
+	{
+		$this->server->getRequest()->setId(21);
+		$this->assertEquals(21, $this->server->getRequest()->id);
+	}
+
+	public function testSetRequestData()
+	{
+		$data = ['name' => 'Test'];
+		$this->server->getRequest()->setData($data);
+		$this->assertEquals($data, $this->server->getRequest()->data);
 	}
 
 }

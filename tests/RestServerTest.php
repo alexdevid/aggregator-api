@@ -34,4 +34,24 @@ class RestServerTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($this->server->getResponse() instanceof Response);
 	}
 
+	public function testIsRestRequest()
+	{
+		$this->assertTrue($this->server->isRestRequest('/' . $this->server->getRequest()->prefix . '/category'));
+	}
+
+	public function testGetController()
+	{
+		$this->server->getRequest()->setUri('/category/21');
+		$this->server->controllerNamespace = 'Controllers';
+		$this->assertTrue($this->server->getController() instanceof \Controllers\CategoryController);
+	}
+
+	public function testProcessRequest()
+	{
+		$this->server->getRequest()->setUri('/category/21');
+		$this->server->controllerNamespace = 'Controllers';
+		$this->server->getRequest()->setMethod('GET');
+		$this->server->processRequest();
+	}
+
 }

@@ -26,10 +26,16 @@ class Request
 	 * @var string Current request uri
 	 */
 	public $uri = '';
-	public $headers;
-	public $resource;
-	public $resource_id;
-	public $params;
+
+	/**
+	 * @var integer Current resource id (/api/category/34 - 34 is id)
+	 */
+	public $id = NULL;
+
+	/**
+	 * @var array Current POST/PUT data
+	 */
+	public $data = NULL;
 
 	public function __construct()
 	{
@@ -41,7 +47,7 @@ class Request
 	 */
 	public function setUri($uri = NULL)
 	{
-		$this->uri = ($uri) ? : filter_input(INPUT_SERVER, "REQUEST_URI");
+		$this->uri = ($uri) ? : str_replace($this->prefix . '/', '', filter_input(INPUT_SERVER, "REQUEST_URI"));
 	}
 
 	/**
@@ -59,6 +65,22 @@ class Request
 	public function setPrefix($prefix = NULL)
 	{
 		$this->prefix = ($prefix) ? : self::DEFAULT_PREFIX;
+	}
+
+	/**
+	 * @param array $data
+	 */
+	public function setData(array $data = [])
+	{
+		$this->data = $data ? : NULL;
+	}
+
+	/**
+	 * @param integer $id
+	 */
+	public function setId($id = NULL)
+	{
+		$this->id = $id ? : NULL;
 	}
 
 }

@@ -11,8 +11,8 @@ class Response
 {
 
 	const DEFAULT_CONTENT_TYPE = 'application/json';
-	const DEFAULT_RESPONSE_STATUS = "Internal Server Error";
-	const DEFAULT_RESPONSE_CODE = 500;
+	const DEFAULT_RESPONSE_STATUS = "Forbidden";
+	const DEFAULT_RESPONSE_CODE = 403;
 
 	public static $statuses = [
 		100 => 'Continue',
@@ -81,6 +81,11 @@ class Response
 	];
 
 	/**
+	 * @var string Response body
+	 */
+	public $content = "";
+
+	/**
 	 *
 	 */
 	public function __construct()
@@ -140,6 +145,24 @@ class Response
 	public function getStatusByCode($code)
 	{
 		return self::$statuses[$code];
+	}
+
+	/**
+	 * @param boolean $test Dirty hack for testing
+	 */
+	public function send($test = null)
+	{
+		if ($test) {
+			echo $this;
+		} else {
+			$this->setHeaders();
+			echo $this;
+		}
+	}
+
+	public function __toString()
+	{
+		return $this->content;
 	}
 
 }

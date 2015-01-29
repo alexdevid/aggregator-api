@@ -13,17 +13,17 @@ use Alexdevid\RestController;
 class CategoryController extends RestController
 {
 
-	public function get($id = null)
+	public function get()
 	{
-		if ($id) {
-			$response = Category::find_by_pk($id, [])->to_json();
+		if ($this->request->id) {
+			$data = "gettin resource by ID";
 		} else {
-			$response = $this->responseArray(Category::find('all'));
+			$data = "gettin all resources";
 		}
-		return $response;
+		return $this->response($data);
 	}
 
-	public function delete($id)
+	public function delete()
 	{
 
 	}
@@ -33,7 +33,7 @@ class CategoryController extends RestController
 
 	}
 
-	public function post($id)
+	public function post()
 	{
 
 	}

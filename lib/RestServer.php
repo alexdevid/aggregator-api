@@ -20,7 +20,13 @@ class RestServer
 	private $response;
 
 	/**
-	 * 
+	 * @var string Controller namespace
+	 */
+	public $controllerNamespace = "";
+	public $testing = true;
+
+	/**
+	 *
 	 */
 	public function __construct()
 	{
@@ -42,6 +48,35 @@ class RestServer
 	public function getResponse()
 	{
 		return $this->response;
+	}
+
+	/**
+	 * @return ControllerClassName or Null
+	 */
+	public function getController()
+	{
+		$controllerName = '\\' . $this->controllerNamespace . '\\' . ucfirst(explode('/', $this->request->uri)[1]) . 'Controller';
+		return class_exists($controllerName) ? new $controllerName($this->request) : NULL;
+	}
+
+	public function processRequest()
+	{
+		$actionName = strtolower($this->request->method);
+		$this->response->content = $this->getController()->$actionName();
+		$this->response->send($this->testing);
+	}
+
+	/**
+	 * @param string $uri Full request url
+	 * @return boolean
+	 */
+	public function isRestRequest($uri = NULL)
+	{
+		if ($uri) {
+			return strpos($uri, $this->request->prefix) ? true : false;
+		} else {
+			return strpos(filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->request->prefix) ? true : false;
+		}
 	}
 
 }
