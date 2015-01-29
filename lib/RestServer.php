@@ -9,48 +9,39 @@ namespace Alexdevid;
 class RestServer
 {
 
-	public $request;
-	public $controllersNamespace;
-	public $modelsNamespace;
-	public $modelsDir;
-	public $prefix = 'api';
-	public $db = [];
-
 	/**
-	 * @var Kernel application instance
+	 * @var \Alexdevid\Request
 	 */
-	public static $app = null;
+	private $request;
 
 	/**
-	 * @inheritdoc
+	 * @var \Alexdevid\Response
+	 */
+	private $response;
+
+	/**
+	 * 
 	 */
 	public function __construct()
 	{
-		RestServer::$app = $this;
+		$this->request = new Request;
+		$this->response = new Response;
 	}
 
 	/**
-	 * @return \App\Kernel
+	 * @return \Alexdevid\Request
 	 */
-	private function initConnection()
+	public function getRequest()
 	{
-		\ActiveRecord\Config::initialize(function($cfg) {
-			$cfg->set_model_directory($this->modelsDir);
-			$cfg->set_connections([
-				'development' => 'mysql://' . $this->db['username'] . ':' . $this->db['password'] . '@' . $this->db['host'] . '/' . $this->db['name'] . '?charset=utf8',
-				'production' => 'mysql://' . $this->db['username'] . ':' . $this->db['password'] . '@' . $this->db['host'] . '/' . $this->db['name'] . '?charset=utf8',
-			]);
-		});
-		return $this;
+		return $this->request;
 	}
 
 	/**
-	 *
-	 * @return type
+	 * @return \Alexdevid\Response
 	 */
-	public function end()
+	public function getResponse()
 	{
-		return die();
+		return $this->response;
 	}
 
 }
