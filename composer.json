@@ -10,6 +10,7 @@
             "email": "kerdevid@gmail.com"
         }
     ],
+	"minimum-stability": "dev",
     "require": {
         "php": ">=5.3.0",
         "php-activerecord/php-activerecord": "dev-master"
