@@ -1,0 +1,17 @@
+{
+    "name": "alexdevid/rest",
+    "description": "rest api + website for me!",
+    "authors": [
+        {
+            "name": "Alexander Devid",
+            "email": "kerdevid@gmail.com"
+        }
+    ],
+    "require": {
+        "php-activerecord/php-activerecord": "dev-master",
+        "symfony/yaml": "~2.6.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

@@ -1,0 +1,8 @@
+app_name: alexdevid_portal
+db:
+    name: aggr
+    username: root
+    password: ''
+    host: localhost
+rest:
+    prefix: api

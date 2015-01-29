@@ -1,4 +1,4 @@
 vendor
-config/main.php
 nbproject
 .idea
+app/config/config.yml
