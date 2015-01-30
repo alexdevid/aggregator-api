@@ -1,21 +1,22 @@
 {
-    "name": "alexdevid/rest-server",
-    "description": "Simple php REST-server",
-    "keywords": ["rest", "php", "minimal"],
-    "homepage": "http://github.com/alexdevid/rest-server/",
-    "license": "MIT",
-	"version" : "1.0.0-alpha",
-    "authors": [
-        {
-            "name": "Alexander Devid",
-            "email": "kerdevid@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.0",
-        "php-activerecord/php-activerecord": "dev-master"
-    },
-    "autoload": {
-        "files": [ "Server.php" ]
-    }
+	"name": "alexdevid/rest-server",
+	"description": "Simple php REST-server",
+	"keywords": ["rest", "php", "minimal"],
+	"homepage": "http://github.com/alexdevid/rest-server/",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Alexander Devid",
+			"email": "kerdevid@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0"
+	},
+	"require-dev": {
+		"guzzlehttp/guzzle": "~5.0"
+	},
+	"autoload": {
+		"files": ["Server.php"]
+	}
 }

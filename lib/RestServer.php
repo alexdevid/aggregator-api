@@ -9,61 +9,74 @@ namespace Alexdevid;
 class RestServer
 {
 
-	public $request;
-	public $controllersNamespace;
-	public $modelsNamespace;
-	public $modelsDir;
-	public $prefix = 'api';
-	public $db = [];
+	/**
+	 * @var \Alexdevid\Request
+	 */
+	private $request;
 
 	/**
-	 * @var Kernel application instance
+	 * @var \Alexdevid\Response
 	 */
-	public static $app = null;
+	private $response;
 
 	/**
-	 * @inheritdoc
+	 * @var string Controller namespace
 	 */
-	public function __construct($config)
-	{
-
-		RestServer::$app = $this;
-
-		foreach ($config as $key => $value) {
-			$this->$key = $value;
-		}
-
-		$this->initConnection();
-
-		new Rest;
-
-		if (!$this->request) {
-			$this->end();
-		}
-	}
-
-	/**
-	 * @return \App\Kernel
-	 */
-	private function initConnection()
-	{
-		\ActiveRecord\Config::initialize(function($cfg) {
-			$cfg->set_model_directory($this->modelsDir);
-			$cfg->set_connections([
-				'development' => 'mysql://' . $this->db['username'] . ':' . $this->db['password'] . '@' . $this->db['host'] . '/' . $this->db['name'] . '?charset=utf8',
-				'production' => 'mysql://' . $this->db['username'] . ':' . $this->db['password'] . '@' . $this->db['host'] . '/' . $this->db['name'] . '?charset=utf8',
-			]);
-		});
-		return $this;
-	}
+	public $controllerNamespace = "";
+	public $testing = true;
 
 	/**
 	 *
-	 * @return type
 	 */
-	public function end()
+	public function __construct()
 	{
-		return die();
+		$this->request = new Request;
+		$this->response = new Response;
+	}
+
+	/**
+	 * @return \Alexdevid\Request
+	 */
+	public function getRequest()
+	{
+		return $this->request;
+	}
+
+	/**
+	 * @return \Alexdevid\Response
+	 */
+	public function getResponse()
+	{
+		return $this->response;
+	}
+
+	/**
+	 * @return ControllerClassName or Null
+	 */
+	public function getController()
+	{
+		$controllerName = '\\' . $this->controllerNamespace . '\\' . ucfirst(explode('/', $this->request->uri)[1]) . 'Controller';
+		return class_exists($controllerName) ? new $controllerName($this->request) : NULL;
+	}
+
+	public function processRequest()
+	{
+		$actionName = strtolower($this->request->method);
+		$this->response->content = $this->getController()->$actionName();
+		$this->response->send($this->testing);
+	}
+
+	/**
+	 * @param string $uri Full request url
+	 * @return boolean
+	 */
+	public function isRestRequest($uri = NULL)
+	{
+		if ($uri) {
+			return strpos($uri, $this->request->prefix) ? true : false;
+		} else {
+			return strpos(filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->request->prefix) ? true : false;
+		}
 	}
 
 }

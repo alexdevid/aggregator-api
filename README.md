@@ -57,3 +57,15 @@ Each method is responsible for its own request method.
 #### Models
 Models should extend ```ActiveRecord\Model``` class.
 Please refer to this, if you don't know how to use it: https://github.com/jpfuentes2/php-activerecord
+=======
+abstract public function get();
+abstract public function post();
+abstract public function put();
+abstract public function delete();
+```
+Each method is responsible for its own request method.
+
+
+#### Testing
+
+You can run PHPUnit tests in tests folder

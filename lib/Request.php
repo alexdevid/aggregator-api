@@ -10,60 +10,77 @@ namespace Alexdevid;
 class Request
 {
 
-	public $method;
-	public $headers;
-	public $request_uri;
-	public $resource;
-	public $resource_id;
-	public $params;
+	const DEFAULT_PREFIX = 'api';
 
-	public function __construct($prefix)
+	/**
+	 * @var string Method verb (GET, POST, PUT, DELETE)
+	 */
+	public $method = NULL;
+
+	/**
+	 * @var string Prefix to use before uri (/api/category/34 - api - is prefix)
+	 */
+	public $prefix = self::DEFAULT_PREFIX;
+
+	/**
+	 * @var string Current request uri
+	 */
+	public $uri = '';
+
+	/**
+	 * @var integer Current resource id (/api/category/34 - 34 is id)
+	 */
+	public $id = NULL;
+
+	/**
+	 * @var array Current POST/PUT data
+	 */
+	public $data = NULL;
+
+	public function __construct()
 	{
-		$this->request_uri = $_SERVER["REQUEST_URI"];
-		$this->method = $_SERVER["REQUEST_METHOD"];
 
-		if (strpos($this->request_uri, $prefix) === false) {
-			RestServer::$app->request = null;
-		} else {
-			RestServer::$app->request = $this;
-		}
-
-		$this->request_uri = str_replace($prefix . '/', '', $this->request_uri);
-		$requestArray = explode('/', $this->request_uri);
-		$this->resource = $requestArray[1];
-
-		if (count($requestArray) > 2) {
-			$this->resource_id = $requestArray[2];
-		} else {
-			$this->resource_id = null;
-		}
-
-		$this->headers = $this->getHeaders();
 	}
 
 	/**
-	 * Function to get HTTP headers
+	 * @param string $uri
 	 */
-	private function getHeaders()
+	public function setUri($uri = NULL)
 	{
-		if (function_exists('apache_request_headers')) {
-			return apache_request_headers();
-		}
-		$headers = array();
-		$keys = preg_grep('{^HTTP_}i', array_keys($_SERVER));
-		foreach ($keys as $val) {
-			$key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($val, 5)))));
-			$headers[$key] = $_SERVER[$val];
-		}
-		return $headers;
+		$this->uri = ($uri) ? : str_replace($this->prefix . '/', '', filter_input(INPUT_SERVER, "REQUEST_URI"));
 	}
 
-	public function setHeaders()
+	/**
+	 * @param string $method
+	 */
+	public function setMethod($method = NULL)
 	{
-		//header("HTTP/1.1 $code $status");
-		header('Content-type: application/json');
-		header('Access-Control-Allow-Origin: *');
-		header('Access-Control-Allow-Methods: GET, POST, PUT');
+		$this->method = ($method) ? : str_replace($this->prefix . '/', '', filter_input(INPUT_SERVER, "REQUEST_METHOD"));
+	}
+
+	/**
+	 *
+	 * @param string $prefix
+	 */
+	public function setPrefix($prefix = NULL)
+	{
+		$this->prefix = ($prefix) ? : self::DEFAULT_PREFIX;
+	}
+
+	/**
+	 * @param array $data
+	 */
+	public function setData(array $data = [])
+	{
+		$this->data = $data ? : NULL;
+	}
+
+	/**
+	 * @param integer $id
+	 */
+	public function setId($id = NULL)
+	{
+		$this->id = $id ? : NULL;
 	}
 
 }
