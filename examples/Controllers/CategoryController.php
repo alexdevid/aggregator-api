@@ -15,28 +15,26 @@ class CategoryController extends RestController
 	public function get()
 	{
 		if ($this->request->id) {
-			$data = "getting resource by ID " . $this->request->id;
+			$data = '{"name" : "boobs", "system_name": "tits", "id": 21}';
 		} else {
-			$data = "getting all resources";
+			$data = '[{"name" : "boobs", "system_name": "tits", "id": 21}]';
 		}
 		return $this->response($data, 200);
 	}
 
-	// @codeCoverageIgnoreStart
 	public function delete()
 	{
-
+		return $this->response("1", 200);
 	}
 
 	public function put()
 	{
-
+		return $this->response(json_encode($this->request->data), 200);
 	}
 
 	public function post()
 	{
-
+		return $this->response(json_encode($this->request->data), 201);
 	}
 
-	// @codeCoverageIgnoreEnd
 }
