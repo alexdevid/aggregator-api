@@ -69,12 +69,13 @@ class RestServer
 
 	public function processRequest()
 	{
-		$actionName = strtolower($this->request->method);
 		$this->request
 				->setUri()
 				->setMethod(filter_input(INPUT_SERVER, "REQUEST_METHOD"))
 				->setId($this->request->getIdFromUri());
+		
 		$controller = $this->getController();
+		$actionName = strtolower($this->request->method);
 
 		if ($controller) {
 			$this->response->setCode($controller->responseStatusCode);
