@@ -114,11 +114,8 @@ class Request
 	{
 		$data = [];
 
-		if ($this->method == 'PUT') {
-			parse_str(file_get_contents("php://input"), $data);
-		}
-		if ($this->method == 'POST') {
-			$data = $_POST;
+		if ($this->method == 'PUT' || $this->method == 'POST') {
+			$data = json_decode(file_get_contents("php://input"), true);
 		}
 
 		return $data;
