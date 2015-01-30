@@ -72,7 +72,8 @@ class RestServer
 		$this->request
 				->setUri()
 				->setMethod(filter_input(INPUT_SERVER, "REQUEST_METHOD"))
-				->setId($this->request->getIdFromUri());
+				->setId($this->request->getIdFromUri())
+				->setData($this->request->substractData());
 
 		$controller = $this->getController();
 		$actionName = strtolower($this->request->method);

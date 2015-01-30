@@ -106,4 +106,22 @@ class Request
 		return NULL;
 	}
 
+	/**
+	 *
+	 * @return array
+	 */
+	public function substractData()
+	{
+		$data = [];
+
+		if ($this->method == 'PUT') {
+			parse_str(file_get_contents("php://input"), $data);
+		}
+		if ($this->method == 'POST') {
+			$data = $_POST;
+		}
+
+		return $data;
+	}
+
 }
