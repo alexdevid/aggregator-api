@@ -68,6 +68,7 @@ class RestServer
 	{
 		$actionName = strtolower($this->request->method);
 		$this->request
+				->setUri()
 				->setMethod(filter_input(INPUT_SERVER, "REQUEST_METHOD"))
 				->setId($this->request->getIdFromUri());
 		$controller = $this->getController();
