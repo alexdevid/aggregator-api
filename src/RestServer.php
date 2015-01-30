@@ -23,7 +23,6 @@ class RestServer
 	 * @var string Controller namespace
 	 */
 	public $controllerNamespace = "";
-	public $testing = true;
 
 	/**
 	 *
@@ -32,6 +31,12 @@ class RestServer
 	{
 		$this->request = new Request;
 		$this->response = new Response;
+
+		if ($this->isRestRequest()) {
+			$this->processRequest();
+		} else {
+			$this->response->send();
+		}
 	}
 
 	/**
@@ -62,8 +67,18 @@ class RestServer
 	public function processRequest()
 	{
 		$actionName = strtolower($this->request->method);
-		$this->response->content = $this->getController()->$actionName();
-		$this->response->send($this->testing);
+		$this->request
+				->setMethod(filter_input(INPUT_SERVER, "REQUEST_METHOD"))
+				->setId($this->request->getIdFromUri());
+		$controller = $this->getController();
+
+		if ($controller) {
+			$this->response->setCode($controller->responseStatusCode);
+			$this->response->content = $controller->$actionName();
+			$this->response->send();
+		} else {
+			$this->response->send();
+		};
 	}
 
 	/**

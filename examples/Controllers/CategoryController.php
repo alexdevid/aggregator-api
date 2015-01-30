@@ -15,13 +15,14 @@ class CategoryController extends RestController
 	public function get()
 	{
 		if ($this->request->id) {
-			$data = "gettin resource by ID";
+			$data = "getting resource by ID " . $this->request->id;
 		} else {
-			$data = "gettin all resources";
+			$data = "getting all resources";
 		}
-		return $this->response($data);
+		return $this->response($data, 200);
 	}
 
+	// @codeCoverageIgnoreStart
 	public function delete()
 	{
 
@@ -37,4 +38,5 @@ class CategoryController extends RestController
 
 	}
 
+	// @codeCoverageIgnoreEnd
 }

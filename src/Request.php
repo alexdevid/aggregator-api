@@ -48,6 +48,7 @@ class Request
 	public function setUri($uri = NULL)
 	{
 		$this->uri = ($uri) ? : str_replace($this->prefix . '/', '', filter_input(INPUT_SERVER, "REQUEST_URI"));
+		return $this;
 	}
 
 	/**
@@ -56,6 +57,7 @@ class Request
 	public function setMethod($method = NULL)
 	{
 		$this->method = ($method) ? : str_replace($this->prefix . '/', '', filter_input(INPUT_SERVER, "REQUEST_METHOD"));
+		return $this;
 	}
 
 	/**
@@ -65,6 +67,7 @@ class Request
 	public function setPrefix($prefix = NULL)
 	{
 		$this->prefix = ($prefix) ? : self::DEFAULT_PREFIX;
+		return $this;
 	}
 
 	/**
@@ -73,6 +76,7 @@ class Request
 	public function setData(array $data = [])
 	{
 		$this->data = $data ? : NULL;
+		return $this;
 	}
 
 	/**
@@ -81,6 +85,25 @@ class Request
 	public function setId($id = NULL)
 	{
 		$this->id = $id ? : NULL;
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return \Alexdevid\Request
+	 */
+	public function getIdFromUri()
+	{
+
+		$uriArray = explode('/', $this->uri);
+		if ($uriArray[0] == "") {
+			unset($uriArray[0]);
+			$uriArray = array_values($uriArray);
+		}
+		if (count($uriArray) > 1) {
+			return $uriArray[1];
+		}
+		return NULL;
 	}
 
 }

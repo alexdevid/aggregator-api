@@ -98,7 +98,7 @@ class Response
 	 */
 	public function setHeaders()
 	{
-		header(" $this->code $this->status");
+		header("HTTP/1.1 $this->code $this->status");
 		header('Content-type: ' . $this->contentType);
 		header('Access-Control-Allow-Origin: *');
 		header('Access-Control-Allow-Methods: ' . $this->getAllowedMethodsString());
@@ -148,16 +148,12 @@ class Response
 	}
 
 	/**
-	 * @param boolean $test Dirty hack for testing
+	 *
 	 */
-	public function send($test = null)
+	public function send()
 	{
-		if ($test) {
-			echo $this;
-		} else {
-			$this->setHeaders();
-			echo $this;
-		}
+		$this->setHeaders();
+		echo $this;
 	}
 
 	public function __toString()

@@ -7,10 +7,11 @@ namespace Alexdevid;
  *
  * @author alexdevid
  */
-abstract class RestController
+class RestController
 {
 
 	public $request;
+	public $responseStatusCode = Response::DEFAULT_RESPONSE_CODE;
 
 	public function __construct($request)
 	{
@@ -20,21 +21,35 @@ abstract class RestController
 	/**
 	 * Custom function used to serialize data passed from Controller
 	 * @param type $data Data passed from controller
+	 * @param integer $statusCode
 	 * @return string
 	 * @json
 	 */
-	public function response($data)
+	public function response($data, $statusCode = NULL)
 	{
+		$this->responseStatusCode = $statusCode;
 		return $data;
 	}
 
 	// @codeCoverageIgnoreStart
-	abstract public function get();
+	public function get()
+	{
 
-	abstract public function post();
+	}
 
-	abstract public function put();
+	public function post()
+	{
 
-	abstract public function delete();
+	}
+
+	public function put()
+	{
+
+	}
+
+	public function delete()
+	{
+
+	}
 	// @codeCoverageIgnoreEnd
 }

@@ -5,7 +5,7 @@ use Alexdevid\Response;
 
 /**
  * Description of ResponseTest
- *
+ * @runInSeparateProcess
  * @author alexdevid
  */
 class ResponseTest extends \PHPUnit_Framework_TestCase
@@ -20,22 +20,34 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 		$this->response = $this->server->getResponse();
 	}
 
+	/**
+	 * @runInSeparateProcess
+	 */
 	public function testDefaultResponseStatus()
 	{
 		$this->assertEquals($this->response->status, Response::$statuses[Response::DEFAULT_RESPONSE_CODE]);
 	}
 
+	/**
+	 * @runInSeparateProcess
+	 */
 	public function testSetResponseStatus()
 	{
 		$this->response->setStatus('Not Modified');
 		$this->assertEquals($this->response->status, 'Not Modified');
 	}
 
+	/**
+	 * @runInSeparateProcess
+	 */
 	public function testDefaultStatusCode()
 	{
 		$this->assertEquals($this->response->code, Response::DEFAULT_RESPONSE_CODE);
 	}
 
+	/**
+	 * @runInSeparateProcess
+	 */
 	public function testSetStatusCode()
 	{
 		$this->response->setCode(304);
@@ -43,6 +55,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($this->response->status, Response::$statuses[304]);
 	}
 
+	/**
+	 * @runInSeparateProcess
+	 */
 	public function tesetSetAllowedMethods()
 	{
 		$methods = ['GET', 'PUT'];
@@ -50,6 +65,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($this->response->allowedMethods, $methods);
 	}
 
+	/**
+	 * @runInSeparateProcess
+	 */
 	public function testGetAllowedMethodsString()
 	{
 		$methods = ['GET', 'PUT'];
