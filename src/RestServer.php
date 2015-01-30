@@ -31,7 +31,10 @@ class RestServer
 	{
 		$this->request = new Request;
 		$this->response = new Response;
+	}
 
+	public function run()
+	{
 		if ($this->isRestRequest()) {
 			$this->processRequest();
 		} else {
