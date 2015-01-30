@@ -34,7 +34,9 @@ class RestGuzzleTest extends \PHPUnit_Framework_TestCase
 
 	public function testPost()
 	{
-
+		$response = $this->client->get($this->domain . 'category/21');
+		$data = json_decode($response->getBody(true), true);
+		$this->assertArrayHasKey('system_name', $data);
 	}
 
 	public function testPut()
