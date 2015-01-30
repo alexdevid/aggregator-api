@@ -73,13 +73,13 @@ class RestServer
 				->setUri()
 				->setMethod(filter_input(INPUT_SERVER, "REQUEST_METHOD"))
 				->setId($this->request->getIdFromUri());
-		
+
 		$controller = $this->getController();
 		$actionName = strtolower($this->request->method);
 
 		if ($controller) {
-			$this->response->setCode($controller->responseStatusCode);
 			$this->response->content = $controller->$actionName();
+			$this->response->setCode($controller->responseStatusCode);
 			$this->response->send();
 		} else {
 			$this->response->send();
