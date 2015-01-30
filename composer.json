@@ -17,6 +17,8 @@
 		"guzzlehttp/guzzle": "~5.0"
 	},
 	"autoload": {
-		"files": ["Server.php"]
+		"psr-4": {
+			"Alexdevid\\": "src/"
+		}
 	}
 }
