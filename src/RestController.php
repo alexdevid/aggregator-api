@@ -10,46 +10,56 @@ namespace Alexdevid;
 class RestController
 {
 
-	public $request;
-	public $responseStatusCode = Response::DEFAULT_RESPONSE_CODE;
+    public $request;
+    private $responseStatusCode = Response::DEFAULT_RESPONSE_CODE;
 
-	public function __construct($request)
-	{
-		$this->request = $request;
-	}
+    public function __construct($request)
+    {
+        $this->request = $request;
+    }
 
-	/**
-	 * Custom function used to serialize data passed from Controller
-	 * @param type $data Data passed from controller
-	 * @param integer $statusCode
-	 * @return string
-	 * @json
-	 */
-	public function response($data, $statusCode = NULL)
-	{
-		$this->responseStatusCode = $statusCode;
-		return $data;
-	}
+    /**
+     * Custom function used to serialize data passed from Controller
+     * @param type $data Data passed from controller
+     * @param integer $statusCode
+     * @return string
+     * @json
+     */
+    public function response($data, $statusCode = Response::DEFAULT_RESPONSE_CODE)
+    {
+        $this->responseStatusCode = $statusCode;
+        return $data;
+    }
 
-	// @codeCoverageIgnoreStart
-	public function get()
-	{
+    /**
+     * 
+     * @return integer
+     */
+    public function getResponseStatusCode()
+    {
+        return $this->responseStatusCode;
+    }
 
-	}
+    // @codeCoverageIgnoreStart
+    public function get()
+    {
+        
+    }
 
-	public function post()
-	{
+    public function post()
+    {
+        
+    }
 
-	}
+    public function put()
+    {
+        
+    }
 
-	public function put()
-	{
+    public function delete()
+    {
+        
+    }
 
-	}
-
-	public function delete()
-	{
-
-	}
-	// @codeCoverageIgnoreEnd
+    // @codeCoverageIgnoreEnd
 }
