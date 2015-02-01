@@ -155,6 +155,17 @@ class Response
 		$this->setHeaders();
 		echo $this;
 	}
+    
+	/**
+	 *
+	 */
+	public function error($message = "", $code = self::DEFAULT_RESPONSE_CODE)
+	{
+        $this->setCode($code);
+        $this->content = $message;
+		$this->setHeaders();
+		echo $this;
+	}
 
 	public function __toString()
 	{
