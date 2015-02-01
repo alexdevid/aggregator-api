@@ -63,10 +63,17 @@ class RestServer
 	 */
 	public function getController()
 	{
-		$controllerName = '\\' . $this->controllerNamespace . '\\' . ucfirst(explode('/', $this->request->uri)[1]) . 'Controller';
+		$controllerName = $this->getControllerName();
 		return class_exists($controllerName) ? new $controllerName($this->request) : NULL;
 	}
+    
+    private function getControllerName() {
+        return '\\' . $this->controllerNamespace . '\\' . ucfirst(explode('/', $this->request->uri)[1]) . 'Controller';
+    }
 
+    /**
+     * 
+     */
 	public function processRequest()
 	{
 		$this->request
@@ -75,15 +82,15 @@ class RestServer
 				->setId($this->request->getIdFromUri())
 				->setData($this->request->substractData());
 
-		$controller = $this->getController();
+		$controller = $this->getController();        
 		$actionName = strtolower($this->request->method);
 
 		if ($controller) {
 			$this->response->content = $controller->$actionName();
-			$this->response->setCode($controller->responseStatusCode);
+			$this->response->setCode($controller->getResponseStatusCode());
 			$this->response->send();
 		} else {
-			$this->response->send();
+			$this->response->error("Controller <" . $this->getControllerName() . "> does not exist or not loaded", 500);
 		};
 	}
 
