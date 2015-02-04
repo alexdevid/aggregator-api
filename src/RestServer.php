@@ -67,13 +67,14 @@ class RestServer
 		return class_exists($controllerName) ? new $controllerName($this->request) : NULL;
 	}
 
-    private function getControllerName() {
-        return '\\' . $this->controllerNamespace . '\\' . ucfirst(explode('/', $this->request->uri)[1]) . 'Controller';
-    }
+	private function getControllerName()
+	{
+		return '\\' . $this->controllerNamespace . '\\' . ucfirst(explode('/', $this->request->uri)[1]) . 'Controller';
+	}
 
-    /**
-     *
-     */
+	/**
+	 *
+	 */
 	public function processRequest()
 	{
 		ini_set("allow_url_fopen", true);
