@@ -61,15 +61,4 @@ class RestServerTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue(is_subclass_of($this->server->getController(), '\Alexdevid\RestController') );
 	}
 
-	/**
-	 * @runInSeparateProcess
-	 */
-	public function testProcessRequest()
-	{
-		$this->server->getRequest()->setUri('/category/21');
-		$this->server->controllerNamespace = 'Controllers';
-		$this->server->getRequest()->setMethod('GET');
-		$this->server->processRequest();
-	}
-
 }

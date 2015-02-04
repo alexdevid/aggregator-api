@@ -115,9 +115,15 @@ class Request
 		$data = [];
 
 		if ($this->method == 'PUT' || $this->method == 'POST') {
-			$data = json_decode(file_get_contents("php://input"), true);
+			$raw = file_get_contents("php://input");
+			$data = json_decode($raw, true);
+			if ($data) {
+				return $data;
+			}
+			
+			parse_str($raw, $post_vars);
+			return $post_vars;
 		}
-
 		return $data;
 	}
 
